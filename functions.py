@@ -30,11 +30,14 @@ def get_service_info(service_name):
         'uptime': uptime
     }
 
-# Функция для проверки существования службы на системе
+# Улучшенная функция для проверки существования службы, даже если она не активна
 def is_service_exist(service_name: str) -> bool:
     try:
-        # Используем systemctl для проверки, загружена ли служба
-        subprocess.run(["systemctl", "status", service_name], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        return True
+        # Используем systemctl для проверки, существует ли служба
+        result = subprocess.run(
+            ["systemctl", "status", service_name],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+        return "Loaded" in result.stdout.decode()  # Проверяем, загружена ли служба
     except subprocess.CalledProcessError:
         return False
