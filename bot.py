@@ -8,6 +8,8 @@ from aiogram.types import BotCommand
 from config import API_TOKEN
 from handlers import start, admin_kb, service_kb
 
+from config import ADMINS
+
 async def set_bot_commands(bot: Bot) -> None:
     commands = [
         BotCommand(command="start", description="Начать работу")
