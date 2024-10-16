@@ -1,4 +1,4 @@
-mport aiosqlite
+import aiosqlite
 import subprocess
 
 from aiogram import Router, F, Bot
